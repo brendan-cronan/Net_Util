@@ -47,7 +47,7 @@ class Net_Util{
     String out="";
     for(int c:i)
       out+=c+"|";
-    out=out.substring(0,out.length-1);
+    out=out.substring(0,out.length()-1);
     sendToServer("INTARR",out,s);
   }
 
@@ -68,7 +68,7 @@ class Net_Util{
     String out="";
     for(String str:starr)
       out+=str+"|";
-    out=out.substring(0,out.length-1);
+    out=out.substring(0,out.length()-1);
     sendToServer("STRINGARR",out,s);
   }
   /**
@@ -83,7 +83,7 @@ class Net_Util{
 
 
   private static void sendToServer(String type,String message,Socket s){
-    
+
     switch(type){
       case "INT":
         break;
