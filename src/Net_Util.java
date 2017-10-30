@@ -78,7 +78,7 @@ class Net_Util{
   public static void send(Socket s, int i){
     sendToServer("INT",i+"",s);
   }
-  
+
   /*
    *  This is adaptable to any type.
    *  I just didnt feel like doing all types of arrays.
@@ -96,7 +96,8 @@ class Net_Util{
     sendToServer("BOOL",bool,s);
   }
   public static void send(Socket s, Object o){
-    sendToServer("OBJ",o.toString(),s);
+    if(o instanceof Cerealizable)
+      sendToServer("OBJ",o.cerealize(),s);
   }
   public static void send(Socket s, double d){
     sendToServer("DOUBLE",d+"",s);
@@ -137,8 +138,24 @@ class Net_Util{
 
       return 0;
   }
+  //The user must deCerealize this string on their own.  Hopefully they know
+  //what the object is.
+  public static String recObj(Socket inSocket)throws IOException{
+    String type="OBJ";
+    String[] tokens;
 
+    //This does the thing below.
+    BufferedReader in=getReader(inSocket);
+    //BufferedReader in=new BufferedReader(new InputStreamReader(inSocket.getInputStream()));
 
+    tokens=in.readLine().split("::");
+    if(!type.equals(tokens[0])){
+
+        return "";
+    }
+    String message=tokens[1];
+    return message;
+  }
 
 
 
