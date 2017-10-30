@@ -78,6 +78,7 @@ class Net_Util{
   public static void send(Socket s, int i){
     sendToServer("INT",i+"",s);
   }
+  
   /*
    *  This is adaptable to any type.
    *  I just didnt feel like doing all types of arrays.
