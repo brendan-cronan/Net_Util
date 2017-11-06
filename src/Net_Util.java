@@ -136,7 +136,7 @@ class Net_Util{
       String message=tokens[1];
 
 
-      return 0;
+      return Integer.parseInt(message);
   }
   //The user must deCerealize this string on their own.  Hopefully they know
   //what the object is.
