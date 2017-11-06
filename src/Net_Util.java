@@ -119,7 +119,6 @@ class Net_Util{
 
 
 
-
   public static int recInt(Socket inSocket)throws IOException{
     String type="INT";
     String[] tokens;
@@ -130,13 +129,103 @@ class Net_Util{
 
       tokens=in.readLine().split("::");
       if(!type.equals(tokens[0])){
-
-        //return false;
+    	  System.out.println("Wrong type recieved. Expected " + type + ". Recieved" + tokens[0]);
+    	  return (Integer) null;
       }
       String message=tokens[1];
 
 
       return Integer.parseInt(message);
+<<<<<<< HEAD
+=======
+  }
+  
+  public static int[] recIntArr(Socket inSocket)throws IOException{
+	  String type="INTARR";
+	  BufferedReader in=getReader(inSocket);
+	  ArrayList<Integer> list = new ArrayList<>();
+	  String[] tokens; 
+	  tokens=in.readLine().split("::");
+	  if(!type.equals(tokens[0])){
+		  System.out.println("Wrong type recieved. Expected " + type + ". Recieved" + tokens[0]);
+		  return null;
+	  }
+	  StringTokenizer tok = new StringTokenizer(tokens[1], "|");
+	  while(tok.hasMoreTokens()) {
+		  list.add(Integer.parseInt(tok.nextToken()));
+	  }
+	  int[] arr = new int[list.size()];
+	  int count = 0;
+	  for(int i: list) {
+		  arr[count++] = i;
+	  }
+	  return arr;
+  }
+  
+  public static boolean recBool(Socket inSocket)throws IOException{
+	  String type="BOOL";
+	  BufferedReader in=getReader(inSocket);
+	  boolean bool;
+	  String[] tokens; 
+	  tokens=in.readLine().split("::");
+	  if(!type.equals(tokens[0])){
+		  System.out.println("Wrong type recieved. Expected " + type + ". Recieved" + tokens[0]);
+		  return (Boolean) null;
+	  }
+	  //FIXME:may not work
+	  bool = Boolean.parseBoolean(tokens[1]);
+	  return bool;
+  }
+  
+  public static double recDouble(Socket inSocket)throws IOException{
+	  String type="DOUBLE";
+	  BufferedReader in=getReader(inSocket);
+	  double dub;
+	  String[] tokens; 
+	  tokens=in.readLine().split("::");
+	  if(!type.equals(tokens[0])){
+		  System.out.println("Wrong type recieved. Expected " + type + ". Recieved" + tokens[0]);
+		  return (Double) null;
+	  }
+	  
+	  dub = Double.parseDouble(tokens[1]);
+	  return dub;
+  }
+  
+  public static String recString(Socket inSocket)throws IOException{
+	  String type="STRING";
+	  BufferedReader in=getReader(inSocket);
+	  String[] tokens; 
+	  tokens=in.readLine().split("::");
+	  if(!type.equals(tokens[0])){
+		  System.out.println("Wrong type recieved. Expected " + type + ". Recieved" + tokens[0]);
+		  return null;
+	  }
+	  return tokens[1];
+  }
+  
+  public static String[] recStrArr(Socket inSocket)throws IOException{
+	  String type="STRINGARR";
+	  BufferedReader in=getReader(inSocket);
+	  ArrayList<String> list = new ArrayList<>();
+	  String[] tokens; 
+	  tokens=in.readLine().split("::");
+	  if(!type.equals(tokens[0])){
+		  System.out.println("Wrong type recieved. Expected " + type + ". Recieved" + tokens[0]);
+		  return null;
+	  }
+	  StringTokenizer tok = new StringTokenizer(tokens[1], "|");
+	  while(tok.hasMoreTokens()) {
+		  list.add(tok.nextToken());
+	  }
+	  String[] arr = new String[list.size()];
+	  int count = 0;
+	  for(String str: list) {
+		  arr[count++] = str;
+	  }
+
+	  return arr;
+>>>>>>> a4be157b6476558c35f1773cbaf0e1031697e474
   }
   //The user must deCerealize this string on their own.  Hopefully they know
   //what the object is.
